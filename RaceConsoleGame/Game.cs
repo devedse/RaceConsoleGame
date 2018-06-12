@@ -19,7 +19,6 @@ namespace RaceConsoleGame
             for (int i = 0; i < AmountOfHorses; i++)
             {
                 Horses.Add(new Horse("Huppelpaard" + i, random));
-
             }
         }
 
@@ -29,15 +28,20 @@ namespace RaceConsoleGame
             {
                 huppelpaard.UpdatePos();
             }
-
-
-
         }
-        //public bool ShowWinner()
-        //{
-        //    if(....) //Als het einde race is, toon welke paard;
-        //    return true;
-        //}
-        //return false;
+
+        public bool HasWinner(Horse horse)
+        {
+            if (horse.location >= LengthOfTrack)
+            {
+                Console.WriteLine($"{horse.Name} has won the race!");
+                return true;
+            }
+            return false;
+        }
+        //1. Ik wil dat de methode checkt of er een paard heeft gewonnen of niet
+        //ok, hoe gaan we dat doen:
+        //      a. Check of er een paard LengthOfTrack heeft geraakt, dus 100.
+
     }
 }

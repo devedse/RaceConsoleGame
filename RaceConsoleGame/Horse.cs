@@ -10,7 +10,7 @@ namespace RaceConsoleGame
     public class Horse
     {
         //private Random Speed { get; set; }
-        private int location = 0;
+        public int location = 0;
         public string Name { get; set; }
         private Random random;
 
