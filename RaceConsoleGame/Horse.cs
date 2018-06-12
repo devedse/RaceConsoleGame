@@ -19,7 +19,7 @@ namespace RaceConsoleGame
             this.Name = nameOfHorse;
             this.random = random;
         }
-
+        //test
         public void UpdatePos()
         {
             location += random.Next(1, 5);
