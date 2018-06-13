@@ -11,14 +11,33 @@ namespace RaceConsoleGame
     {
         public List<Horse> Horses { get; set; }
         private const int LengthOfTrack = 100;
+        private Timer timer;
 
         public void Start(int AmountOfHorses)
         {
             Horses = new List<Horse>();
             Random random = new Random();
+
             for (int i = 0; i < AmountOfHorses; i++)
             {
                 Horses.Add(new Horse("Huppelpaard" + i, random));
+            }
+
+            bool erIsEenWinnaar = false;
+
+            while (erIsEenWinnaar == false)
+            {
+                LaatDePaardjesEenStapLopen();
+
+                foreach (var horse in Horses)
+                {
+                    if (horse.location >= LengthOfTrack)
+                    {
+                        erIsEenWinnaar = true;
+                        Console.WriteLine($"{horse.Name} has won the race!");
+                    }
+                }
+                Thread.Sleep(100);
             }
         }
 
@@ -39,9 +58,7 @@ namespace RaceConsoleGame
             }
             return false;
         }
-        //1. Ik wil dat de methode checkt of er een paard heeft gewonnen of niet
-        //ok, hoe gaan we dat doen:
-        //      a. Check of er een paard LengthOfTrack heeft geraakt, dus 100.
+        //In plaats van 3 paarden hardcoded, wil ik dat paarden automatisch worden aangemaakt
 
     }
 }

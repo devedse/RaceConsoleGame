@@ -12,11 +12,7 @@ namespace RaceConsoleGame
         {
             Console.WriteLine("The race is starting...");
             var game = new Game();
-            game.Start(4);
-
-            game.LaatDePaardjesEenStapLopen();
-            game.LaatDePaardjesEenStapLopen();
-            game.LaatDePaardjesEenStapLopen();
+            game.Start(4);     
 
             Console.ReadLine();
 

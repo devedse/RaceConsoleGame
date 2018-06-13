@@ -13,7 +13,6 @@ namespace RaceConsoleGame
         public int location = 0;
         public string Name { get; set; }
         private Random random;
-
         public Horse(string nameOfHorse, Random random)
         {
             this.Name = nameOfHorse;
@@ -21,7 +20,7 @@ namespace RaceConsoleGame
         }
         //test
         public void UpdatePos()
-        {
+        {   
             location += random.Next(1, 5);
             Console.WriteLine($"{Name}: {location}");
         }
