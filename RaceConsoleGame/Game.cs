@@ -10,19 +10,34 @@ namespace RaceConsoleGame
     public class Game
     {
         public List<Horse> Horses { get; set; }
+        
+        public List<Gambler> Gamblers { get; set; }
         private const int LengthOfTrack = 100;
-        private Timer timer;
-
-        public void Start(int AmountOfHorses)
+        private Timer timer; 
+        
+        public Game(int AmountOfHorses)
         {
             Horses = new List<Horse>();
-            Random random = new Random();
+            Gamblers = new List<Gambler>();
+            Random random = new Random(); 
 
             for (int i = 0; i < AmountOfHorses; i++)
             {
                 Horses.Add(new Horse("Huppelpaard" + i, random));
             }
-
+        }
+        public void Start(int AmountOfHorses)
+        {
+            
+            //Wat we willen: Implementatie van Gamblers en Bets
+            //1. Gamblers moeten zich voor de race registreren met een Naam
+            //- Maak een Gambler Klasse aan
+            //- Met fields: 1. Name, 2. Cash 
+            //2. We moeten dan aan alle gamblers vragen op welke paarden ze willen betten
+            //      Elke bet heeft dus een Gambler, een amount en een Horse
+            //3. We moeten de game laten spelen
+            //4. We moeten de Gamblers uitbetalen
+            
             bool erIsEenWinnaar = false;
 
             while (erIsEenWinnaar == false)
