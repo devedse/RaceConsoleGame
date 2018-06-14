@@ -10,25 +10,73 @@ namespace RaceConsoleGame
     public class Game
     {
         public List<Horse> Horses { get; set; }
-        
+
         public List<Gambler> Gamblers { get; set; }
         private const int LengthOfTrack = 100;
-        private Timer timer; 
-        
+        private Timer timer;
+
         public Game(int AmountOfHorses)
         {
             Horses = new List<Horse>();
             Gamblers = new List<Gambler>();
-            Random random = new Random(); 
+            Random random = new Random();
 
             for (int i = 0; i < AmountOfHorses; i++)
             {
                 Horses.Add(new Horse("Huppelpaard" + i, random));
             }
         }
-        public void Start(int AmountOfHorses)
+
+        public void StartGameLoop()
         {
-            
+            bool deGameIsAanDeGang = true;
+
+            while (deGameIsAanDeGang == true)
+            {
+                Console.WriteLine("What do you want to do?");
+                Console.WriteLine("1. Add Gambler");
+                Console.WriteLine("2. Add bet");
+                Console.WriteLine("3. Start race!");
+                Console.WriteLine("4. Exit");
+
+                var userInput = Convert.ToInt32(Console.ReadLine());
+
+                switch (userInput)
+                {
+                    case 1:
+                        AddGambler();
+                        break;
+                    case 2:
+                        AddBet();
+                        break;
+                    case 3:
+                        StartRace();
+                        break;
+                    case 4:
+                        deGameIsAanDeGang = false;
+                        break;
+                    default:
+                        Console.WriteLine("Insert a valid number");
+                        break;
+                }
+            }
+            Console.WriteLine("Thanks for playing!");
+        }
+
+
+        public void AddGambler()
+        {
+
+        }
+
+        public void AddBet()
+        {
+
+        }
+
+        public void StartRace()
+        {
+
             //Wat we willen: Implementatie van Gamblers en Bets
             //1. Gamblers moeten zich voor de race registreren met een Naam
             //- Maak een Gambler Klasse aan
@@ -37,7 +85,7 @@ namespace RaceConsoleGame
             //      Elke bet heeft dus een Gambler, een amount en een Horse
             //3. We moeten de game laten spelen
             //4. We moeten de Gamblers uitbetalen
-            
+
             bool erIsEenWinnaar = false;
 
             while (erIsEenWinnaar == false)

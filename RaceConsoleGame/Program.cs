@@ -11,11 +11,10 @@ namespace RaceConsoleGame
         static void Main(string[] args)
         {
             Console.WriteLine("The race is starting...");
-            var game = new Game();
-            game.Start(4);     
+            var game = new Game(4);
+            game.StartGameLoop();
 
             Console.ReadLine();
-
         }
     }
 }
