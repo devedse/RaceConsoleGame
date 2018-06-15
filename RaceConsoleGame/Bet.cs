@@ -13,6 +13,11 @@ namespace RaceConsoleGame
         //zonder paarden kun je niet gokken
         public Horse Horses { get; set; }
         //Het bet bedrag voor iedere speler
-        public int BetAmount { get; set; }        
+        public int BetAmount { get; set; }
+
+        public Bet(Gambler gambler)
+        {
+
+        }
     }
 }
