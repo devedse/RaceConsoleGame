@@ -34,7 +34,7 @@ namespace RaceConsoleGame
 
             while (deGameIsAanDeGang == true)
             {
-                Console.WriteLine("1. Add Gambler");
+                Console.WriteLine("\n1. Add Gambler");
                 Console.WriteLine("2. Add bet");
                 Console.WriteLine("3. Start race!");
                 Console.WriteLine("4. Exit");
@@ -68,6 +68,7 @@ namespace RaceConsoleGame
            
             
             Gamblers = new List<Gambler>();
+          
             //var resulInput = Convert.ToInt32(Console.ReadLine());
 
             if(userInput == 1)
@@ -76,9 +77,15 @@ namespace RaceConsoleGame
                 var Name = Console.ReadLine();
 
                 Console.WriteLine($"\n{Name}, how much money do you have?");
-                var Cash = Console.ReadLine();
+                int Cash;
 
-                Console.WriteLine($"Your total cash is {Cash}");
+                while (!int.TryParse(Console.ReadLine(), out Cash))
+                {
+                    Console.WriteLine("This is not money, please don't try to cheat" +
+                                                     "\nSo let us try again, how much?");
+                }
+
+                Console.WriteLine($"\nYour total cash is {Cash}");
                 Gamblers.Add(new Gambler());
             }
             //Willen we voor nu alleen gamblers kunnen toevoegen of ook dat ze een naam en cash meekrijgen?

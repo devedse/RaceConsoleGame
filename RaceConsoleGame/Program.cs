@@ -10,7 +10,10 @@ namespace RaceConsoleGame
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("The race is starting...");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Title = "RaceTrack by Ketty";
+            Console.WriteLine();
+          
             var game = new Game(4);
             game.StartGameLoop();
 
