@@ -30,10 +30,10 @@ namespace RaceConsoleGame
         public void StartGameLoop()
         {
             bool deGameIsAanDeGang = true;
+            Console.WriteLine("What do you want to do?");
 
             while (deGameIsAanDeGang == true)
             {
-                Console.WriteLine("What do you want to do?");
                 Console.WriteLine("1. Add Gambler");
                 Console.WriteLine("2. Add bet");
                 Console.WriteLine("3. Start race!");
@@ -44,7 +44,8 @@ namespace RaceConsoleGame
                 switch (userInput)
                 {
                     case 1:
-                        AddGambler();
+                        AddGambler(1);
+                     
                         break;
                     case 2:
                         AddBet();
@@ -62,16 +63,41 @@ namespace RaceConsoleGame
             }
             Console.WriteLine("Thanks for playing!");
         }
-
-
-        public void AddGambler()
+        public void AddGambler(int userInput)
         {
+           
+            
+            Gamblers = new List<Gambler>();
+            //var resulInput = Convert.ToInt32(Console.ReadLine());
 
+            if(userInput == 1)
+                {
+                Console.WriteLine("What's your name?");
+                var Name = Console.ReadLine();
+
+                Console.WriteLine($"\n{Name}, how much money do you have?");
+                var Cash = Console.ReadLine();
+
+                Console.WriteLine($"Your total cash is {Cash}");
+                Gamblers.Add(new Gambler());
+            }
+            //Willen we voor nu alleen gamblers kunnen toevoegen of ook dat ze een naam en cash meekrijgen?
+
+            //Wat ik zou doen is dit:
+
+            //Applictie vraagt what is your name
+            //Dan doe je met die console readline van ok dit is de naam
+            //Dan what is your money
+            //zelfde
+            //Dan in een gambler stoppen
+            //en aan de lijst toeveogen
+
+            //
         }
 
         public void AddBet()
         {
-
+  
         }
 
         public void StartRace()
