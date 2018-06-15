@@ -9,7 +9,7 @@ namespace RaceConsoleGame
 
     public class Game
     {
-        public List<Horse> Horses { get; set; }
+        private List<Horse> Horses { get; set; }
 
         public List<Gambler> Gamblers { get; set; }
         private const int LengthOfTrack = 100;
@@ -19,11 +19,10 @@ namespace RaceConsoleGame
         {
             Horses = new List<Horse>();
             Gamblers = new List<Gambler>();
-            Random random = new Random();
 
             for (int i = 0; i < AmountOfHorses; i++)
             {
-                Horses.Add(new Horse("Huppelpaard" + i, random));
+                Horses.Add(new Horse("Huppelpaard" + i));
             }
         }
 
@@ -64,9 +63,7 @@ namespace RaceConsoleGame
             Console.WriteLine("Thanks for playing!");
         }
         public void AddGambler(int userInput)
-        {
-           
-            
+        { 
             Gamblers = new List<Gambler>();
           
             //var resulInput = Convert.ToInt32(Console.ReadLine());
@@ -81,13 +78,14 @@ namespace RaceConsoleGame
 
                 while (!int.TryParse(Console.ReadLine(), out Cash))
                 {
-                    Console.WriteLine("This is not money, please don't try to cheat" +
-                                                     "\nSo let us try again, how much?");
+                    Console.WriteLine("\nThis is not money, please don't try to cheat" +
+                                                  "\nSo I'm asking you one more time, how much?");
                 }
 
                 Console.WriteLine($"\nYour total cash is {Cash}");
-                Gamblers.Add(new Gambler());
+                Gamblers.Add(new Gambler(Name, Cash));
             }
+
             //Willen we voor nu alleen gamblers kunnen toevoegen of ook dat ze een naam en cash meekrijgen?
 
             //Wat ik zou doen is dit:
@@ -98,8 +96,6 @@ namespace RaceConsoleGame
             //zelfde
             //Dan in een gambler stoppen
             //en aan de lijst toeveogen
-
-            //
         }
 
         public void AddBet()

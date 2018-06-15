@@ -13,10 +13,11 @@ namespace RaceConsoleGame
         public int location = 0;
         public string Name { get; set; }
         private Random random;
-        public Horse(string nameOfHorse, Random random)
+        public Horse(string nameOfHorse)
         {
             this.Name = nameOfHorse;
-            this.random = random;
+            var guid = Guid.NewGuid();
+            random = new Random(guid.GetHashCode());
         }
         //test
         public void UpdatePos()
