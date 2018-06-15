@@ -43,7 +43,7 @@ namespace RaceConsoleGame
                 switch (userInput)
                 {
                     case 1:
-                        AddGambler(1);
+                        AddGambler();
                         break;
                     case 2:
                         AddBet();
@@ -67,13 +67,30 @@ namespace RaceConsoleGame
 
         public void AddGambler()
         {
+            //Oh HUH is die 1 van case 1 int 1 als in user input 1???<--dus hiervan is het antwoord ja ja oooh Huuuuuuuuuuuhhhhhhhhhhhh hier kusje op je gezicht <3 bam :DLekker hmm ja jij ook
+            //Maar ik bedoel ik doe die vergelijking nu toch nergens, hoe da fak weet ie dat
+            //Wat case betekent is als userInput == 1 dan ga daarnaartoe
+            //Dus effectief
+            //staat er dit:
+            //var userInput = Convert.ToInt32(Console.ReadLine());
+            //if (userInput == 1)
+            //{
+            //    AddGambler();
+            //}
+            //else if (userInput == 2)
+            //{
+            //    AddBet();
+            //}
+            //die case switch compiled naar dat wat ik hierboven typ
+            //Dus omdat je switch (userInput) doet weet hij dat hij bij case 1: die 1 moet vergelijken met userInput
+
 
             //Ok nu eerst inchecken en dan door met die bet
             //Oja en die int userInput moet hier nog weg want die was overbodig :) Dat blijf ik nog een lastig dingetje vinden :( Ja is goed
             //Ja ik kan dat beter in person uitleggen een keer
             //Ohja nu compiled de code niet meer
             //die moet je ook ff fixen
-            //en daarna incheckereren :D
+            //en daarna incheckereren :D 
 
 
             Console.WriteLine("What's your name?");
