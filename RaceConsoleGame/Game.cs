@@ -13,7 +13,6 @@ namespace RaceConsoleGame
 
         public List<Gambler> Gamblers { get; set; }
         private const int LengthOfTrack = 100;
-        private Timer timer;
 
         public Game(int AmountOfHorses)
         {
@@ -36,7 +35,8 @@ namespace RaceConsoleGame
                 Console.WriteLine("\n1. Add Gambler");
                 Console.WriteLine("2. Add bet");
                 Console.WriteLine("3. Start race!");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("4. Show All Gamblers");
+                Console.WriteLine("5. Exit");
 
                 var userInput = Convert.ToInt32(Console.ReadLine());
 
@@ -44,7 +44,6 @@ namespace RaceConsoleGame
                 {
                     case 1:
                         AddGambler(1);
-                     
                         break;
                     case 2:
                         AddBet();
@@ -53,6 +52,9 @@ namespace RaceConsoleGame
                         StartRace();
                         break;
                     case 4:
+                        ShowGamblers();
+                        break;
+                    case 5:
                         deGameIsAanDeGang = false;
                         break;
                     default:
@@ -62,45 +64,48 @@ namespace RaceConsoleGame
             }
             Console.WriteLine("Thanks for playing!");
         }
-        public void AddGambler(int userInput)
-        { 
-            Gamblers = new List<Gambler>();
-          
-            //var resulInput = Convert.ToInt32(Console.ReadLine());
 
-            if(userInput == 1)
-                {
-                Console.WriteLine("What's your name?");
-                var Name = Console.ReadLine();
+        public void AddGambler()
+        {
 
-                Console.WriteLine($"\n{Name}, how much money do you have?");
-                int Cash;
+            //Ok nu eerst inchecken en dan door met die bet
+            //Oja en die int userInput moet hier nog weg want die was overbodig :) Dat blijf ik nog een lastig dingetje vinden :( Ja is goed
+            //Ja ik kan dat beter in person uitleggen een keer
+            //Ohja nu compiled de code niet meer
+            //die moet je ook ff fixen
+            //en daarna incheckereren :D
 
-                while (!int.TryParse(Console.ReadLine(), out Cash))
-                {
-                    Console.WriteLine("\nThis is not money, please don't try to cheat" +
-                                                  "\nSo I'm asking you one more time, how much?");
-                }
 
-                Console.WriteLine($"\nYour total cash is {Cash}");
-                Gamblers.Add(new Gambler(Name, Cash));
+            Console.WriteLine("What's your name?");
+            var name = Console.ReadLine();
+
+            Console.WriteLine($"\n{name}, how much money do you have?");
+            int cash;
+
+            while (!int.TryParse(Console.ReadLine(), out cash))
+            {
+                Console.WriteLine("\nThis is not money, please don't try to cheat");
+                Console.WriteLine("So I'm asking you one more time, how much?");
             }
 
-            //Willen we voor nu alleen gamblers kunnen toevoegen of ook dat ze een naam en cash meekrijgen?
+            Console.WriteLine($"\nYour total cash is {cash}");
 
-            //Wat ik zou doen is dit:
-
-            //Applictie vraagt what is your name
-            //Dan doe je met die console readline van ok dit is de naam
-            //Dan what is your money
-            //zelfde
-            //Dan in een gambler stoppen
-            //en aan de lijst toeveogen
+            Gamblers.Add(new Gambler(name, cash));
+            Console.WriteLine($"{name} is now added to the game");
         }
 
+        public void ShowGamblers()
+        {
+            Console.WriteLine("\nAll gamblers:");
+            for (int i = 0; i < Gamblers.Count; i++)
+            {
+                var gambler = Gamblers[i];
+                Console.WriteLine($"{i + 1}.{gambler.Name}, {gambler.Cash}");
+            }
+        }
         public void AddBet()
         {
-  
+            //Ga zo ook ff inchecken :)
         }
 
         public void StartRace()

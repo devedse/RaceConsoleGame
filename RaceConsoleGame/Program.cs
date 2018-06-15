@@ -16,7 +16,7 @@ namespace RaceConsoleGame
           
             var game = new Game(4);
             game.StartGameLoop();
-
+           
             Console.ReadLine();
         }
     }
