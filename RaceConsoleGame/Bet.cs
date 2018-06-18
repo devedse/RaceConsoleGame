@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace RaceConsoleGame
 {
-    class Bet
+    public class Bet
     {
         //Zonder gambler heb je geen bet
         public Gambler Gambler { get; set; }
         //zonder paarden kun je niet gokken
-        public Horse Horses { get; set; }
+        public Horse Horse { get; set; }
         //Het bet bedrag voor iedere speler
         public int BetAmount { get; set; }
 
-        public Bet(Gambler gambler)
+        public Bet(Gambler gambler, int amount, Horse horse)
         {
-
+            this.Gambler = gambler;
+            this.BetAmount = amount;
+            this.Horse = horse;
         }
     }
 }

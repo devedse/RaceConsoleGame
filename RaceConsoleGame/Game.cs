@@ -12,6 +12,7 @@ namespace RaceConsoleGame
         private List<Horse> Horses { get; set; }
 
         public List<Gambler> Gamblers { get; set; }
+        public List<Bet> Bets { get; set; }
         private const int LengthOfTrack = 100;
 
         public Game(int AmountOfHorses)
@@ -33,10 +34,9 @@ namespace RaceConsoleGame
             while (deGameIsAanDeGang == true)
             {
                 Console.WriteLine("\n1. Add Gambler");
-                Console.WriteLine("2. Add bet");
-                Console.WriteLine("3. Start race!");
-                Console.WriteLine("4. Show All Gamblers");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("2. Start race!");
+                Console.WriteLine("3. Show All Gamblers");
+                Console.WriteLine("4. Exit");
 
                 var userInput = Convert.ToInt32(Console.ReadLine());
 
@@ -75,13 +75,13 @@ namespace RaceConsoleGame
 
             while (!int.TryParse(Console.ReadLine(), out cash))
             {
-                Console.WriteLine("\nThis is not money, please don't try to cheat");
-                Console.WriteLine("So I'm asking you one more time, how much?");
+                Console.WriteLine("\nI was asking about money, not about some weird shit.");
             }
 
             Console.WriteLine($"\nYour total cash is {cash}");
 
             Gamblers.Add(new Gambler(name, cash));
+
             Console.WriteLine($"{name} is now added to the game");
         }
 
@@ -96,25 +96,28 @@ namespace RaceConsoleGame
         }
         public void AddBet()
         {
-            //een manier vinden om de gamblers te linken met het bet
-            if (Gamblers == null)
-            {
-                var betAmount = new Bet(); //<-- not sure though
-                Console.WriteLine("\nInsert your bet here:");
-                int bet = Convert.ToInt32(Console.ReadLine());
+            //Ik zou dit ff inchecken weer
 
-                if (bet < 5)
+            if (Gamblers != null)
+            {
+                Console.WriteLine("\nInsert your bet here:");
+
+                int gamblerBet;
+
+                while (!int.TryParse(Console.ReadLine(), out gamblerBet))
                 {
-                    Console.WriteLine("Don't be cheap. Come back when you have more money");
+                    Console.WriteLine("\nThis is not money, please don't try to cheat");
+                    Console.WriteLine("Let's try it once more, what's your bet?");
+                }
+
+                if (gamblerBet < 5)
+                {
+                    Console.WriteLine("Don't be cheap, come back when you've got more money!");
                 }
                 else
                 {
-                    Console.WriteLine($"Your bet is {bet}");
+                    Console.WriteLine($"Your bet is {gamblerBet}");
                 }
-            }
-            else
-            {
-                Console.WriteLine("No players, no game");
             }
         }
 
@@ -122,12 +125,17 @@ namespace RaceConsoleGame
         {
             Console.WriteLine("All bets placed");
 
+            for (int i = 0; i < Bets.Count; i++)
+            {
+                var bet = Bets[i];
+                Console.WriteLine($"{i + 1}{bet.Gambler.Name} has put a bet of:{bet.BetAmount} {bet.Horse.Name}");
+            }
+
         }
         //Een manier zien te vinden om gambler te linken met de bet.
 
         public void StartRace()
         {
-
             //Wat we willen: Implementatie van Gamblers en Bets
             //1. Gamblers moeten zich voor de race registreren met een Naam
             //- Maak een Gambler Klasse aan
@@ -136,7 +144,6 @@ namespace RaceConsoleGame
             //      Elke bet heeft dus een Gambler, een amount en een Horse
             //3. We moeten de game laten spelen
             //4. We moeten de Gamblers uitbetalen
-
             bool erIsEenWinnaar = false;
 
             while (erIsEenWinnaar == false)
@@ -162,7 +169,6 @@ namespace RaceConsoleGame
                 huppelpaard.UpdatePos();
             }
         }
-
         public bool HasWinner(Horse horse)
         {
             if (horse.location >= LengthOfTrack)

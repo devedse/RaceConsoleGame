@@ -13,7 +13,7 @@ namespace RaceConsoleGame
         public int location = 0;
         public string Name { get; set; }
         private Random random;
-        public Horse(string nameOfHorse)
+        public Horse(string nameOfHorse) 
         {
             this.Name = nameOfHorse; //maar hier specifier je hem in de constructor, ja dat is toch ook wat we willen,  :), want je geeft ze al mee aan de constructor
             var guid = Guid.NewGuid();

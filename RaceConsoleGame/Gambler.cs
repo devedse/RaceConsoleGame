@@ -20,7 +20,7 @@ namespace RaceConsoleGame
             //Nou  doe eerst maar eens wat je hierboven typt dan gaan we terug naar de game klasse
 
             //Nou het werkt hetzelfde als bij al die andere dingen
-            //Want kijk eens in ehmmm: Horse
+            //Kijk eens in Horse
         }
     }
 }
