@@ -15,12 +15,7 @@ namespace RaceConsoleGame
         {
             this.Name = name;
             this.Cash = cash;
-            //ok maar stel ik doe:
-            //<-- dit staat nog steeds compleet los van die 'Name' uit de methode in de gameklasse
-            //Nou  doe eerst maar eens wat je hierboven typt dan gaan we terug naar de game klasse
-
-            //Nou het werkt hetzelfde als bij al die andere dingen
-            //Kijk eens in Horse
+         
         }
     }
 }

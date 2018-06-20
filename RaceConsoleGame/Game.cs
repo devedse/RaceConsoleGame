@@ -34,9 +34,10 @@ namespace RaceConsoleGame
             while (deGameIsAanDeGang == true)
             {
                 Console.WriteLine("\n1. Add Gambler");
-                Console.WriteLine("2. Start race!");
-                Console.WriteLine("3. Show All Gamblers");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("2. Add a bet!");
+                Console.WriteLine("3. Start race!");
+                Console.WriteLine("4. Show All Gamblers");
+                Console.WriteLine("5. Exit");
 
                 var userInput = Convert.ToInt32(Console.ReadLine());
 
@@ -97,21 +98,16 @@ namespace RaceConsoleGame
         public void AddBet()
         {
             //Deze code mag later weg
-            var gamblerDavy = new Gambler("Davy", int.MaxValue);
-            var hetPaardWaarDavyOpBet = new Horse("Hupperbeestunitpaard");
-            var davyBet = new Bet(gamblerDavy, 1001, hetPaardWaarDavyOpBet);
+            var gamblerKet = new Gambler("Ketty", int.MaxValue);
+            var hetPaardWaarKetOpBet = new Horse("Hupperbeestunitpaard");
+            var ketBet = new Bet(gamblerKet, 1001, hetPaardWaarKetOpBet);
 
-            //Thanks, what Horse do you want to Bet on?:
-            //Huppelpaard 1
-            //Huppelpaard 2 Ja er kwam ff een schoonmaak wijf langs mn tafel back to business 
-            //Ok 
-            //Ik zou als ik jou was gewoon de code die je gebruikt om die int value op te vragen voor gambler copy pasten naar onder
-            //en dan rewriten voor horses
+            //Thanks, what Horse do you want to Bet on? :
+            //Huppelpaard
 
             if (Gamblers.Count > 0)
             {
-                //Dus ga hier eens dat stuk wat ik hierboven typ uitprogrammeren
-
+                
                 //1. Melding geven dat hij je naam nodig hebt
                 Console.WriteLine("To place a bet, I need to know who you are");
                 //2. Lijst uitprinten met alle namen
@@ -121,7 +117,7 @@ namespace RaceConsoleGame
                 var input = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(input);
                 //4. De bijbehordende gambler zoeken en in de variabele currentGambler stoppen
-                var currentGambler = Gamblers[input];
+                var currentGambler = Gamblers[input-1];  //<--check deze zieke fix
 
                 Console.WriteLine("\nInsert your bet here:");
 
@@ -132,7 +128,7 @@ namespace RaceConsoleGame
                     Console.WriteLine("\nThis is not money, please don't try to cheat");
                     Console.WriteLine("Let's try it once more, what's your bet?");
                 }
-
+       
                 if (gamblerBet < 5)
                 {
                     Console.WriteLine("Don't be cheap, come back when you've got more money!");
@@ -140,39 +136,28 @@ namespace RaceConsoleGame
                 else
                 {
                     Console.WriteLine($"Your bet is {gamblerBet}, on what horse do you want to bet on?");
+                    ShowHorses();
                 }
 
-
                 //2. Lijst uitprinten met alle paarden
-                ShowHorses();
+               
                 //3. Waarde ophalen wat de user invult
                 var selectHorse = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(selectHorse);
                 //4. 
-                //Dus je moet nu alleen nog een bet aanmake oh ik wou net vragen, wat is daar dan mee haha
+      
                 var horse = Horses[selectHorse];
 
                 //1. De gambler: currentGambler
-                //2. De amount: gamblerBet <-- oja deze klopt niet, want waar staat het bet amount in wat je hebt opgehaald
+                //2. De amount: gamblerbet
                 //3. Het paard: horse 
 
-                //Variabelen erin en done :D
-                //
-                // 
-                //dus nu
-                //1. Maak een nieuwe Bet aan
+                //Checken hoeveelheid geld , is het genoeg?
+                //en die hoeveelheid er af halen 
+
                 var bet = new Bet(currentGambler, gamblerBet, horse);
-                Bets.Add(bet); //to hier hah maar ik zie je en kus je vanvaond wel dan :D
-                //succes <3 xx ja 1x in de 10 jr zijn ze hier haha<33
-
-
-                //^^ ok, ik ga nu snel hardlopen
-                //maar ga maar ff inchecken wel, aaaffkkkkkk
-                //en als je wat eerder wilt komen mag ook, dan kunnen we wat langer together zijn
-                //maar kijkmaar
-                //je fam is ook importante
-                //ja daarom
-                //<3 kettytje
+                Bets.Add(bet); 
+ 
             }
         }
 
@@ -187,10 +172,9 @@ namespace RaceConsoleGame
             }
 
         }
-
         public void ShowHorses()
         {
-            Console.WriteLine("All participating horses");
+            Console.WriteLine("\nAll participating horses");
 
             for (int i = 0; i < Horses.Count; i++)
             {
@@ -225,7 +209,6 @@ namespace RaceConsoleGame
                 Thread.Sleep(100);
             }
         }
-
         public void LaatDePaardjesEenStapLopen()
         {
             foreach (var huppelpaard in Horses)
