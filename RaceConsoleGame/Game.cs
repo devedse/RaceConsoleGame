@@ -9,21 +9,21 @@ namespace RaceConsoleGame
 
     public class Game
     {
-        private List<Horse> Horses { get; set; }
+        private List<Horse> _horses { get; set; }
+        private const int _lengthOfTrack = 100;
 
         public List<Gambler> Gamblers { get; set; }
         public List<Bet> Bets { get; set; }
-        private const int LengthOfTrack = 100;
-
-        public Game(int AmountOfHorses)
+        
+        public Game(int amountOfHorses)
         {
-            Horses = new List<Horse>();
+            _horses = new List<Horse>();
             Gamblers = new List<Gambler>();
             Bets = new List<Bet>();
 
-            for (int i = 0; i < AmountOfHorses; i++)
+            for (int i = 0; i < amountOfHorses; i++)
             {
-                Horses.Add(new Horse("Huppelpaard" + i));
+                _horses.Add(new Horse("Huppelpaard" + i));
             }
         }
 
@@ -99,10 +99,10 @@ namespace RaceConsoleGame
         public void AddBet()
         {
             //Deze code mag later weg
-            var gamblerKet = new Gambler("Ketty", int.MaxValue);
-            var hetPaardWaarKetOpBet = new Horse("Hupperbeestunitpaard");
-            var ketBet = new Bet(gamblerKet, 1001, hetPaardWaarKetOpBet);
-
+            //var gamblerKet = new Gambler("Ketty", int.MaxValue);
+            //var hetPaardWaarKetOpBet = new Horse("Hupperbeestunitpaard");
+            //var ketBet = new Bet(gamblerKet, 1001, hetPaardWaarKetOpBet);
+         
             //Thanks, what Horse do you want to Bet on? :
             //Huppelpaard
 
@@ -119,26 +119,33 @@ namespace RaceConsoleGame
                 Console.WriteLine(input);
                 //4. De bijbehordende gambler zoeken en in de variabele currentGambler stoppen
                 var currentGambler = Gamblers[input-1];  //<--check deze zieke fix
-
+      
                 Console.WriteLine("\nInsert your bet here:");
 
                 int gamblerBet;
+             
 
                 while (!int.TryParse(Console.ReadLine(), out gamblerBet))
                 {
                     Console.WriteLine("\nThis is not money, please don't try to cheat");
                     Console.WriteLine("Let's try it once more, what's your bet?");
                 }
-       
+
                 if (gamblerBet < 5)
                 {
                     Console.WriteLine("Don't be cheap, come back when you've got more money!");
                 }
-                else
+                 
+                else if (gamblerBet > currentGambler.Cash)
+                    {
+                        Console.WriteLine("Nice try, but you don't have enough cash");
+                    }
+                    else
                 {
                     Console.WriteLine($"Your bet is {gamblerBet}, on what horse do you want to bet on?");
                     ShowHorses();
                 }
+
 
                 //2. Lijst uitprinten met alle paarden
                
@@ -147,14 +154,11 @@ namespace RaceConsoleGame
                 Console.WriteLine(selectHorse);
                 //4. 
       
-                var horse = Horses[selectHorse];
+                var horse = _horses[selectHorse];
 
                 //1. De gambler: currentGambler
                 //2. De amount: gamblerbet
                 //3. Het paard: horse 
-
-                //Checken hoeveelheid geld , is het genoeg?
-                //en die hoeveelheid er af halen 
 
                 var bet = new Bet(currentGambler, gamblerBet , horse);
                 Bets.Add(bet);
@@ -178,31 +182,31 @@ namespace RaceConsoleGame
         {
             Console.WriteLine("\nAll participating horses");
 
-            for (int i = 0; i < Horses.Count; i++)
+            for (int i = 0; i < _horses.Count; i++)
             {
-                var horse = Horses[i];
+                var horse = _horses[i];
                 Console.WriteLine($"{i + 1}{horse.Name}");
             }
         }
         public void StartRace()
         {
-            //Wat we willen: Implementatie van Gamblers en Bets
+            //Wat ik wil: Implementatie van Gamblers en Bets
             //1. Gamblers moeten zich voor de race registreren met een Naam
             //  - Maak een Gambler Klasse aan
             //  - Met fields: 1. Name, 2. Cash 
-            //2. We moeten dan aan alle gamblers vragen op welke paarden ze willen betten
+            //2. aan alle gamblers vragen op welke paarden ze willen betten
             //  - Elke bet heeft dus een Gambler, een amount en een Horse
-            //3. We moeten de game laten spelen
-            //4. We moeten de Gamblers uitbetalen
+            //3. de game laten spelen
+            //4. de Gamblers uitbetalen
             bool erIsEenWinnaar = false;
 
             while (erIsEenWinnaar == false)
             {
                 LaatDePaardjesEenStapLopen();
 
-                foreach (var horse in Horses)
+                foreach (var horse in _horses)
                 {
-                    if (horse.location >= LengthOfTrack)
+                    if (horse.Location >= _lengthOfTrack)
                     {
                         erIsEenWinnaar = true;
                         Console.WriteLine($"{horse.Name} has won the race!");
@@ -213,14 +217,14 @@ namespace RaceConsoleGame
         }
         public void LaatDePaardjesEenStapLopen()
         {
-            foreach (var huppelpaard in Horses)
+            foreach (var huppelpaard in _horses)
             {
-                huppelpaard.UpdatePos();
+                huppelpaard.UpdatePosition();
             }
         }
         public bool HasWinner(Horse horse)
         {
-            if (horse.location >= LengthOfTrack)
+            if (horse.Location >= _lengthOfTrack)
             {
                 Console.WriteLine($"{horse.Name} has won the race!");
                 return true;

@@ -15,7 +15,7 @@ namespace RaceConsoleGame
             Console.WriteLine();
           
             var game = new Game(7);
-            game.StartGameLoop(); //<-- null reference exception
+            game.StartGameLoop(); 
            
             Console.ReadLine();
         }

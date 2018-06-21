@@ -13,9 +13,8 @@ namespace RaceConsoleGame
 
         public Gambler(string name, int cash)
         {
-            this.Name = name;
-            this.Cash = cash;
-         
+            Name = name;
+            Cash = cash;
         }
     }
 }

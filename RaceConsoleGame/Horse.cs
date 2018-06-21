@@ -9,21 +9,22 @@ namespace RaceConsoleGame
 {
     public class Horse
     {
-        //private Random Speed { get; set; }
-        public int location = 0;
+        private Random _speed;
+
+        public int Location { get; private set; }
         public string Name { get; set; }
-        private Random random;
+        
         public Horse(string nameOfHorse) 
         {
-            this.Name = nameOfHorse; 
+            Name = nameOfHorse; 
             var guid = Guid.NewGuid();
-            random = new Random(guid.GetHashCode());
+            _speed = new Random(guid.GetHashCode());
         }
-        //test
-        public void UpdatePos()
+
+        public void UpdatePosition()
         {
-            location += random.Next(1, 5);
-            Console.WriteLine($"{Name}: {location}");
+            Location += _speed.Next(1, 5);
+            Console.WriteLine($"{Name}: {Location}");
         }
     }
 

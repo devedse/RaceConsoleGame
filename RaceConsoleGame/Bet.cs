@@ -17,9 +17,9 @@ namespace RaceConsoleGame
 
         public Bet(Gambler gambler, int amount, Horse horse)
         {
-            this.Gambler = gambler;
-            this.BetAmount = amount;
-            this.Horse = horse;
+            Gambler = gambler;
+            BetAmount = amount;
+            Horse = horse;
         }
     }
 }
