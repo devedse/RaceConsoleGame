@@ -19,6 +19,7 @@ namespace RaceConsoleGame
         {
             Horses = new List<Horse>();
             Gamblers = new List<Gambler>();
+            Bets = new List<Bet>();
 
             for (int i = 0; i < AmountOfHorses; i++)
             {
@@ -155,9 +156,10 @@ namespace RaceConsoleGame
                 //Checken hoeveelheid geld , is het genoeg?
                 //en die hoeveelheid er af halen 
 
-                var bet = new Bet(currentGambler, gamblerBet, horse);
-                Bets.Add(bet); 
- 
+                var bet = new Bet(currentGambler, gamblerBet , horse);
+                Bets.Add(bet);
+
+                Console.WriteLine($"You have selected {bet.Horse.Name}");
             }
         }
 
@@ -186,10 +188,10 @@ namespace RaceConsoleGame
         {
             //Wat we willen: Implementatie van Gamblers en Bets
             //1. Gamblers moeten zich voor de race registreren met een Naam
-            //- Maak een Gambler Klasse aan
-            //- Met fields: 1. Name, 2. Cash 
+            //  - Maak een Gambler Klasse aan
+            //  - Met fields: 1. Name, 2. Cash 
             //2. We moeten dan aan alle gamblers vragen op welke paarden ze willen betten
-            //      Elke bet heeft dus een Gambler, een amount en een Horse
+            //  - Elke bet heeft dus een Gambler, een amount en een Horse
             //3. We moeten de game laten spelen
             //4. We moeten de Gamblers uitbetalen
             bool erIsEenWinnaar = false;
