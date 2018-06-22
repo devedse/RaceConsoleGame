@@ -6,7 +6,6 @@ using System.Threading;
 
 namespace RaceConsoleGame
 {
-
     public class Game
     {
         private List<Horse> _horses { get; set; }
@@ -32,14 +31,16 @@ namespace RaceConsoleGame
             bool deGameIsAanDeGang = true;
             Console.WriteLine("What do you want to do?");
 
-            while (deGameIsAanDeGang == true)
+            while (deGameIsAanDeGang) //==true is niet meer nodig, want hierboven heb je al gespecificeerd dat de methode true is.
             {
+                //game menu
                 Console.WriteLine("\n1. Add Gambler");
                 Console.WriteLine("2. Add a bet!");
                 Console.WriteLine("3. Start race!");
                 Console.WriteLine("4. Show All Gamblers");
                 Console.WriteLine("5. Exit");
 
+                //input van de user
                 var userInput = Convert.ToInt32(Console.ReadLine());
 
                 switch (userInput)
@@ -81,9 +82,7 @@ namespace RaceConsoleGame
             }
 
             Console.WriteLine($"\nYour total cash is {cash}");
-
             Gamblers.Add(new Gambler(name, cash));
-
             Console.WriteLine($"{name} is now added to the game");
         }
 
@@ -93,22 +92,13 @@ namespace RaceConsoleGame
             for (int i = 0; i < Gamblers.Count; i++)
             {
                 var gambler = Gamblers[i];
-                Console.WriteLine($"{i + 1}.{gambler.Name}, {gambler.Cash}");
+                Console.WriteLine($"{i + 1}.{gambler.Name}, {gambler.Cash}");  
             }
         }
         public void AddBet()
         {
-            //Deze code mag later weg
-            //var gamblerKet = new Gambler("Ketty", int.MaxValue);
-            //var hetPaardWaarKetOpBet = new Horse("Hupperbeestunitpaard");
-            //var ketBet = new Bet(gamblerKet, 1001, hetPaardWaarKetOpBet);
-         
-            //Thanks, what Horse do you want to Bet on? :
-            //Huppelpaard
-
             if (Gamblers.Count > 0)
             {
-                
                 //1. Melding geven dat hij je naam nodig hebt
                 Console.WriteLine("To place a bet, I need to know who you are");
                 //2. Lijst uitprinten met alle namen
@@ -118,12 +108,11 @@ namespace RaceConsoleGame
                 var input = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(input);
                 //4. De bijbehordende gambler zoeken en in de variabele currentGambler stoppen
-                var currentGambler = Gamblers[input-1];  //<--check deze zieke fix
-      
+                var currentGambler = Gamblers[input - 1];  
+
                 Console.WriteLine("\nInsert your bet here:");
 
                 int gamblerBet;
-             
 
                 while (!int.TryParse(Console.ReadLine(), out gamblerBet))
                 {
@@ -135,36 +124,57 @@ namespace RaceConsoleGame
                 {
                     Console.WriteLine("Don't be cheap, come back when you've got more money!");
                 }
-                 
+
                 else if (gamblerBet > currentGambler.Cash)
-                    {
-                        Console.WriteLine("Nice try, but you don't have enough cash");
-                    }
-                    else
+                {
+                    Console.WriteLine("Nice try, but you don't have enough cash");
+                }
+                else
                 {
                     Console.WriteLine($"Your bet is {gamblerBet}, on what horse do you want to bet on?");
                     ShowHorses();
                 }
 
-
                 //2. Lijst uitprinten met alle paarden
-               
+
                 //3. Waarde ophalen wat de user invult
                 var selectHorse = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(selectHorse);
                 //4. 
-      
+
                 var horse = _horses[selectHorse];
 
                 //1. De gambler: currentGambler
                 //2. De amount: gamblerbet
                 //3. Het paard: horse 
 
-                var bet = new Bet(currentGambler, gamblerBet , horse);
+                var bet = new Bet(currentGambler, gamblerBet, horse);
                 Bets.Add(bet);
 
                 Console.WriteLine($"You have selected {bet.Horse.Name}");
+                Console.WriteLine("Do you want to bet on another horse? Y/N");
+
+                ConsoleKeyInfo yes = Console.ReadKey();
+
+                //yes or no kiezen
+                if(yes.Key.ToString() == "Y")
+                {
+                    ShowHorses();
+                }
+                else
+                {
+                   StartGameLoop();
+                }
             }
+        }
+        public void SelectHorse()
+        {
+            for (int i = 0; i < _horses.Count; i++)
+            {
+                var selectedHorses = _horses[i];
+                Console.WriteLine($"{i + 1}You've betted on {Bets}");
+            }
+
         }
 
         public void ShowBet()
