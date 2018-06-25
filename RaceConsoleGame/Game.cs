@@ -36,9 +36,10 @@ namespace RaceConsoleGame
                 //game menu
                 Console.WriteLine("\n1. Add Gambler");
                 Console.WriteLine("2. Add a bet!");
-                Console.WriteLine("3. Start race!");
+                Console.WriteLine("3. Start race!"); //huuuh de race werkt ni meer ;p zucht 
                 Console.WriteLine("4. Show All Gamblers");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. Show All Bets");
+                Console.WriteLine("6. Exit");
 
                 //input van de user
                 var userInput = Convert.ToInt32(Console.ReadLine());
@@ -58,6 +59,9 @@ namespace RaceConsoleGame
                         ShowGamblers();
                         break;
                     case 5:
+                        ShowBet();
+                        break;
+                    case 6:
                         deGameIsAanDeGang = false;
                         break;
                     default:
@@ -205,6 +209,17 @@ namespace RaceConsoleGame
             //3. de game laten spelen
             //4. de Gamblers uitbetalen
 
+            //Ok kom eens naar hier :)
+            //woo :D
+            //wacht ff kijken hoor
+            //Kijk eens hier: https://github.com/devedse/RaceConsoleGame/commit/0a24ebe571bbfa8f0eeadfb38a2a35c0923afbc0
+            //Daar heb je wat code uit deze methode gehaald
+            //Kijk vooral eens hier: https://github.com/devedse/RaceConsoleGame/blob/ce79d20566d580b9265dfe333f2da09ed9006c64/RaceConsoleGame/Game.cs#L217
+            //Dat is de  oude versie van je eigen code
+            //Want je hebt het stukje eruit gehaald dat checkt of een paard een winner is die staat nu toch in haswinner?
+            //uhu, maar roep je die methode al aan? oh nee xD   
+
+
             bool winner = false;
 
             while (winner == false)
@@ -213,18 +228,20 @@ namespace RaceConsoleGame
 
                 foreach (var horse in _horses)
                 {
-                    winner = true;
-                    //--> Ik zou graag willen komen bij betAmount, maar hoe?
-                    //VOlgens mij is hier ook iets fout nu
-                    //Want we moeten nog iets met haswinner doen
-                    //maar winner is nun toch op true gezet
-                    //ja maar is er wel een winner :D?
-                    //nu wel
-                    //xD ik denk het niet
-                    //maaaaar wacht
-                    //voor je iets gaat doen, je moetde code eens runnen dus ff compile errors fixen
-                    //inchecken en dan runnen
-                    Console.WriteLine($"{horse.Name} has won the race!");
+                    if (HasWinner(horse))
+                    {
+                        winner = true;
+                        Console.WriteLine($"{horse.Name} has won the race!");
+                    }
+
+                    //ok probeer het nog eens
+                    //en dan inchecken ^^ze zijn nie meer random -.-
+                    //hoezo? Huppelpaard 0:23 Huppelpaard1 ook weer 23 etc
+                    //lol dan heeft die code van je collega het gesloopt maar hij had t de heletijd gedaan
+                    //:D:D:D
+                    //ow, zal is ff kijken
+                    //Kan je is inchecken
+                    //dan run ik hem ff lokaal
                 }
             }
             Thread.Sleep(100);
@@ -249,11 +266,6 @@ namespace RaceConsoleGame
 
         public int PayOut(int cash, bool winner, Horse horse) //misschien is deze methode overbodig en kan dit ook hierboven worden gegplaatst bij 'eriseenwinnaar'.
         {
-            //Vertel eens, hoe ver ben je allemaal gekomen :)
-            //haha niet, maar ik heb wel ideetjes hoe ik dingen wil doen, maar ben in de war denk ik met hoe ik bij bepaalde waardes kan komen
-            //K, ff zien hoor, is de place bet nu af? ja dat wel, je kan alleen nog maar op 1tje bedden
-            //ff zien
-            //kom nog eens naar de placebet
             if (winner == true)
             {
                 cash += cash;
@@ -261,11 +273,6 @@ namespace RaceConsoleGame
                 //Console.WriteLine($"{} has won {...cash...}");
             }
             return 0;
-
-            //Ok check nu eens in en ga hem dan eens runnen
-            //ik moet ff gaan eten eerst
-            //maar als je ff kijkt wat er gebeurt als je nu de paarden laat racen
-            //
         }
         //In plaats van 3 paarden hardcoded, wil ik dat paarden automatisch worden aangemaakt
         //1. Ik wil dat gamblers op meer dan 1 paard kunnen inzetten
