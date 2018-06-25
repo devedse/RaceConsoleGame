@@ -14,7 +14,7 @@ namespace RaceConsoleGame
             Console.Title = "RaceTrack by Ketty";
             Console.WriteLine();
           
-            var game = new Game(7);
+            var game = new Game(3);
             game.StartGameLoop(); 
            
             Console.ReadLine();

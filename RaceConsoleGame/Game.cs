@@ -13,7 +13,7 @@ namespace RaceConsoleGame
 
         public List<Gambler> Gamblers { get; set; }
         public List<Bet> Bets { get; set; }
-        
+
         public Game(int amountOfHorses)
         {
             _horses = new List<Horse>();
@@ -92,7 +92,7 @@ namespace RaceConsoleGame
             for (int i = 0; i < Gamblers.Count; i++)
             {
                 var gambler = Gamblers[i];
-                Console.WriteLine($"{i + 1}.{gambler.Name}, {gambler.Cash}");  
+                Console.WriteLine($"{i + 1}.{gambler.Name}, {gambler.Cash}");
             }
         }
         public void AddBet()
@@ -108,7 +108,7 @@ namespace RaceConsoleGame
                 var input = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(input);
                 //4. De bijbehordende gambler zoeken en in de variabele currentGambler stoppen
-                var currentGambler = Gamblers[input - 1];  
+                var currentGambler = Gamblers[input - 1];
 
                 Console.WriteLine("\nInsert your bet here:");
 
@@ -142,40 +142,36 @@ namespace RaceConsoleGame
                 Console.WriteLine(selectHorse);
                 //4. 
 
-                var horse = _horses[selectHorse];
+                var horse = _horses[selectHorse - 1];
 
                 //1. De gambler: currentGambler
                 //2. De amount: gamblerbet
                 //3. Het paard: horse 
 
+                currentGambler.Cash -= gamblerBet;
+
                 var bet = new Bet(currentGambler, gamblerBet, horse);
                 Bets.Add(bet);
 
-                Console.WriteLine($"You have selected {bet.Horse.Name}");
-                Console.WriteLine("Do you want to bet on another horse? Y/N");
+                Console.WriteLine($"You've placed another bet on {bet.Horse.Name} with an amount of {bet.BetAmount}");
+                ShowBet();
 
-                ConsoleKeyInfo yes = Console.ReadKey();
+                //Dit 2e stuk zou ik gewoon niet doen
+                //Want je kan altijd nog een keer op 'placebet' drukken om  een nieuwe bet te plaatsen toch? je bedoeld als de speler nogmaals 2 selecteert? ok
+                //ja maar er moet wel iets van output komen dan
+                //Ja, maar is dat niet die showbets? hij moet dan ook ff laten zien op welke paard je hebt gegokt
+                //Nog 1 dingetje wat er mist
+                //ja dat kan
+                //maar 1 dingetje wat er mist is dit:
+                //Het geld afhalen van de currentGambler, ja dat wou ik doen bij Payout methode iegenlijk klopt :)
+                //Ja maar daar krijg je het terug
+                //Hier moet je het al wel er af halen toch
+                //Want je betaald al wel om die bet te plaatsen lijkt mij?
+                //Ok, kzou dat ff hier doen dan :D
 
-                //yes or no kiezen
-                if(yes.Key.ToString() == "Y")
-                {
-                    ShowHorses();
-                }
-                else
-                {
-                   StartGameLoop();
-                }
             }
         }
-        public void SelectHorse()
-        {
-            for (int i = 0; i < _horses.Count; i++)
-            {
-                var selectedHorses = _horses[i];
-                Console.WriteLine($"{i + 1}You've betted on {Bets}");
-            }
 
-        }
 
         public void ShowBet()
         {
@@ -184,7 +180,7 @@ namespace RaceConsoleGame
             for (int i = 0; i < Bets.Count; i++)
             {
                 var bet = Bets[i];
-                Console.WriteLine($"{i + 1}{bet.Gambler.Name} has put a bet of:{bet.BetAmount} {bet.Horse.Name}");
+                Console.WriteLine($"{i + 1}. {bet.Gambler.Name} has put a bet of: {bet.BetAmount} on {bet.Horse.Name}");
             }
 
         }
@@ -195,7 +191,7 @@ namespace RaceConsoleGame
             for (int i = 0; i < _horses.Count; i++)
             {
                 var horse = _horses[i];
-                Console.WriteLine($"{i + 1}{horse.Name}");
+                Console.WriteLine($"{i + 1} {horse.Name}");
             }
         }
         public void StartRace()
@@ -208,23 +204,32 @@ namespace RaceConsoleGame
             //  - Elke bet heeft dus een Gambler, een amount en een Horse
             //3. de game laten spelen
             //4. de Gamblers uitbetalen
-            bool erIsEenWinnaar = false;
 
-            while (erIsEenWinnaar == false)
+            bool winner = false;
+
+            while (winner == false)
             {
                 LaatDePaardjesEenStapLopen();
 
                 foreach (var horse in _horses)
                 {
-                    if (horse.Location >= _lengthOfTrack)
-                    {
-                        erIsEenWinnaar = true;
-                        Console.WriteLine($"{horse.Name} has won the race!");
-                    }
+                    winner = true;
+                    //--> Ik zou graag willen komen bij betAmount, maar hoe?
+                    //VOlgens mij is hier ook iets fout nu
+                    //Want we moeten nog iets met haswinner doen
+                    //maar winner is nun toch op true gezet
+                    //ja maar is er wel een winner :D?
+                    //nu wel
+                    //xD ik denk het niet
+                    //maaaaar wacht
+                    //voor je iets gaat doen, je moetde code eens runnen dus ff compile errors fixen
+                    //inchecken en dan runnen
+                    Console.WriteLine($"{horse.Name} has won the race!");
                 }
-                Thread.Sleep(100);
             }
+            Thread.Sleep(100);
         }
+
         public void LaatDePaardjesEenStapLopen()
         {
             foreach (var huppelpaard in _horses)
@@ -241,7 +246,31 @@ namespace RaceConsoleGame
             }
             return false;
         }
+
+        public int PayOut(int cash, bool winner, Horse horse) //misschien is deze methode overbodig en kan dit ook hierboven worden gegplaatst bij 'eriseenwinnaar'.
+        {
+            //Vertel eens, hoe ver ben je allemaal gekomen :)
+            //haha niet, maar ik heb wel ideetjes hoe ik dingen wil doen, maar ben in de war denk ik met hoe ik bij bepaalde waardes kan komen
+            //K, ff zien hoor, is de place bet nu af? ja dat wel, je kan alleen nog maar op 1tje bedden
+            //ff zien
+            //kom nog eens naar de placebet
+            if (winner == true)
+            {
+                cash += cash;
+                return cash;
+                //Console.WriteLine($"{} has won {...cash...}");
+            }
+            return 0;
+
+            //Ok check nu eens in en ga hem dan eens runnen
+            //ik moet ff gaan eten eerst
+            //maar als je ff kijkt wat er gebeurt als je nu de paarden laat racen
+            //
+        }
         //In plaats van 3 paarden hardcoded, wil ik dat paarden automatisch worden aangemaakt
+        //1. Ik wil dat gamblers op meer dan 1 paard kunnen inzetten
+        //2. Ik wil dat 'cash' voor iedere speler wordt bijgehouden en die wordt uitbetaald na elke winnende race.
+        //3. De gamestartloop moet worden uitgezet 
 
     }
 }
