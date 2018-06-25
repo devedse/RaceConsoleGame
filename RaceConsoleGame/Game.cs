@@ -159,20 +159,6 @@ namespace RaceConsoleGame
 
                 Console.WriteLine($"You've placed another bet on {bet.Horse.Name} with an amount of {bet.BetAmount}");
                 ShowBet();
-
-                //Dit 2e stuk zou ik gewoon niet doen
-                //Want je kan altijd nog een keer op 'placebet' drukken om  een nieuwe bet te plaatsen toch? je bedoeld als de speler nogmaals 2 selecteert? ok
-                //ja maar er moet wel iets van output komen dan
-                //Ja, maar is dat niet die showbets? hij moet dan ook ff laten zien op welke paard je hebt gegokt
-                //Nog 1 dingetje wat er mist
-                //ja dat kan
-                //maar 1 dingetje wat er mist is dit:
-                //Het geld afhalen van de currentGambler, ja dat wou ik doen bij Payout methode iegenlijk klopt :)
-                //Ja maar daar krijg je het terug
-                //Hier moet je het al wel er af halen toch
-                //Want je betaald al wel om die bet te plaatsen lijkt mij?
-                //Ok, kzou dat ff hier doen dan :D
-
             }
         }
 
@@ -209,17 +195,6 @@ namespace RaceConsoleGame
             //3. de game laten spelen
             //4. de Gamblers uitbetalen
 
-            //Ok kom eens naar hier :)
-            //woo :D
-            //wacht ff kijken hoor
-            //Kijk eens hier: https://github.com/devedse/RaceConsoleGame/commit/0a24ebe571bbfa8f0eeadfb38a2a35c0923afbc0
-            //Daar heb je wat code uit deze methode gehaald
-            //Kijk vooral eens hier: https://github.com/devedse/RaceConsoleGame/blob/ce79d20566d580b9265dfe333f2da09ed9006c64/RaceConsoleGame/Game.cs#L217
-            //Dat is de  oude versie van je eigen code
-            //Want je hebt het stukje eruit gehaald dat checkt of een paard een winner is die staat nu toch in haswinner?
-            //uhu, maar roep je die methode al aan? oh nee xD   
-
-
             bool winner = false;
 
             while (winner == false)
@@ -227,21 +202,16 @@ namespace RaceConsoleGame
                 LaatDePaardjesEenStapLopen();
 
                 foreach (var horse in _horses)
-                {
+                { 
+                    
                     if (HasWinner(horse))
-                    {
+                    { 
                         winner = true;
                         Console.WriteLine($"{horse.Name} has won the race!");
-                    }
 
-                    //ok probeer het nog eens
-                    //en dan inchecken ^^ze zijn nie meer random -.-
-                    //hoezo? Huppelpaard 0:23 Huppelpaard1 ook weer 23 etc
-                    //lol dan heeft die code van je collega het gesloopt maar hij had t de heletijd gedaan
-                    //:D:D:D
-                    //ow, zal is ff kijken
-                    //Kan je is inchecken
-                    //dan run ik hem ff lokaal
+                        PayOut(horse);
+                        break;
+                    }
                 }
             }
             Thread.Sleep(100);
@@ -264,15 +234,22 @@ namespace RaceConsoleGame
             return false;
         }
 
-        public int PayOut(int cash, bool winner, Horse horse) //misschien is deze methode overbodig en kan dit ook hierboven worden gegplaatst bij 'eriseenwinnaar'.
+        public void PayOut(Horse winningHorse)
         {
-            if (winner == true)
+
+            for (int i = 0; i < Bets.Count; i++)
             {
-                cash += cash;
-                return cash;
-                //Console.WriteLine($"{} has won {...cash...}");
+                var bet = Bets[i];
+
+                if (winningHorse == bet.Horse)
+                {
+                    //jaaaa probeer het nu eens
+                    //en dan inchecken ^^ er moet nog ff wat in die payout methode die nu aangeroepen wordt
+                    //wat denk je dat er in moet horse
+                    bet.Gambler.Cash += bet.BetAmount * 2;
+                    Console.WriteLine($"{bet.Gambler.Name} has won {bet.BetAmount * 2}");
+                }
             }
-            return 0;
         }
         //In plaats van 3 paarden hardcoded, wil ik dat paarden automatisch worden aangemaakt
         //1. Ik wil dat gamblers op meer dan 1 paard kunnen inzetten
