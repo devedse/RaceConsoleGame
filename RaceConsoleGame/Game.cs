@@ -31,12 +31,12 @@ namespace RaceConsoleGame
             bool deGameIsAanDeGang = true;
             Console.WriteLine("What do you want to do?");
 
-            while (deGameIsAanDeGang) //==true is niet meer nodig, want hierboven heb je al gespecificeerd dat de methode true is.
+            while (deGameIsAanDeGang) //==true is niet meer nodig, want hierboven heb ik al gespecificeerd dat de methode true is.
             {
                 //game menu
                 Console.WriteLine("\n1. Add Gambler");
                 Console.WriteLine("2. Add a bet!");
-                Console.WriteLine("3. Start race!"); //huuuh de race werkt ni meer ;p zucht 
+                Console.WriteLine("3. Start race!"); 
                 Console.WriteLine("4. Show All Gamblers");
                 Console.WriteLine("5. Show All Bets");
                 Console.WriteLine("6. Exit");
@@ -82,7 +82,7 @@ namespace RaceConsoleGame
 
             while (!int.TryParse(Console.ReadLine(), out cash))
             {
-                Console.WriteLine("\nI was asking about money, not about some weird shit.");
+                Console.WriteLine("\nI was asking about money, not about some weird stuff.");
             }
 
             Console.WriteLine($"\nYour total cash is {cash}");
@@ -155,13 +155,13 @@ namespace RaceConsoleGame
                 currentGambler.Cash -= gamblerBet;
 
                 var bet = new Bet(currentGambler, gamblerBet, horse);
+                
                 Bets.Add(bet);
 
                 Console.WriteLine($"You've placed another bet on {bet.Horse.Name} with an amount of {bet.BetAmount}");
                 ShowBet();
             }
         }
-
 
         public void ShowBet()
         {
@@ -172,7 +172,6 @@ namespace RaceConsoleGame
                 var bet = Bets[i];
                 Console.WriteLine($"{i + 1}. {bet.Gambler.Name} has put a bet of: {bet.BetAmount} on {bet.Horse.Name}");
             }
-
         }
         public void ShowHorses()
         {
@@ -243,9 +242,7 @@ namespace RaceConsoleGame
 
                 if (winningHorse == bet.Horse)
                 {
-                    //jaaaa probeer het nu eens
-                    //en dan inchecken ^^ er moet nog ff wat in die payout methode die nu aangeroepen wordt
-                    //wat denk je dat er in moet horse
+                    
                     bet.Gambler.Cash += bet.BetAmount * 2;
                     Console.WriteLine($"{bet.Gambler.Name} has won {bet.BetAmount * 2}");
                 }
