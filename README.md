@@ -10,6 +10,7 @@ This game is the Horse racing game but then on the console
     
     //Lijstjes maken van lijstjes waar je bij wilt komen
         private List<Horse> _horses { get; set; }
+	//private heeft als naamgeving underscore en kleine letter & geen getter/setter
         private const int _lengthOfTrack = 100;
 
         public List<Gambler> Gamblers { get; set; }
@@ -27,6 +28,7 @@ This game is the Horse racing game but then on the console
             //Door te loopen door dit for-loopje, kun je bij elk einde van de loop een nieuw paardje toevoegen
             for (int i = 0; i < amountOfHorses; i++)
             {
+	    	//Binnen het loopje wordt Huppelpaard toegevoegd
                 _horses.Add(new Horse("Huppelpaard" + i));
             }
         }
@@ -38,13 +40,13 @@ This game is the Horse racing game but then on the console
          //Hier zetten we de game standaard op true omdat een boolean een false heeft als default.
             bool deGameIsAanDeGang = true;
             Console.WriteLine("What do you want to do?");
-
+	
             while (deGameIsAanDeGang) //hier staat geen ==true achter omdat de while check standaard op true is
             {
-                //game menu
+                //game keuze menu voor als de game aan de gang is
                 Console.WriteLine("\n1. Add Gambler");
                 Console.WriteLine("2. Add a bet!");
-                Console.WriteLine("3. Start race!"); //huuuh de race werkt ni meer ;p zucht 
+                Console.WriteLine("3. Start race!"); 
                 Console.WriteLine("4. Show All Gamblers");
                 Console.WriteLine("5. Show All Bets");
                 Console.WriteLine("6. Exit");
@@ -107,6 +109,8 @@ This game is the Horse racing game but then on the console
         public void ShowGamblers()
         {
             Console.WriteLine("\nAll participating gamblers:");
+	    
+	    //Door dit forloopje heen gaan en alle gamblers 
             for (int i = 0; i < Gamblers.Count; i++)
             {
                 var gambler = Gamblers[i];
@@ -132,20 +136,21 @@ This game is the Horse racing game but then on the console
                 var currentGambler = Gamblers[input - 1];
 
                 Console.WriteLine("\nInsert your bet here:");
-
+		
+		//locale variable waarin de bet van de gambler wordt opgeslagen
                 int gamblerBet;
-
+		
                 while (!int.TryParse(Console.ReadLine(), out gamblerBet))
                 {
                     Console.WriteLine("\nThis is not money, please don't try to cheat");
                     Console.WriteLine("Let's try it once more, what's your bet?");
                 }
-
+		//Als de game bet minder is dan 5euro dan kun je niet inleggen
                 if (gamblerBet < 5)
                 {
                     Console.WriteLine("Don't be cheap, come back when you've got more money!");
                 }
-
+		//Als de gambler niet genoeg cash heeft, dan kan hij niet inleggen
                 else if (gamblerBet > currentGambler.Cash)
                 {
                     Console.WriteLine("Nice try, but you don't have enough cash");
@@ -168,7 +173,8 @@ This game is the Horse racing game but then on the console
                 //1. De gambler: currentGambler
                 //2. De amount: gamblerbet
                 //3. Het paard: horse 
-
+		
+		//De bet bedrag gaat af van het huidige geld van de gambler
                 currentGambler.Cash -= gamblerBet;
 
                 var bet = new Bet(currentGambler, gamblerBet, horse);
@@ -211,7 +217,8 @@ This game is the Horse racing game but then on the console
             //  - Elke bet heeft dus een Gambler, een amount en een Horse
             //3. de game laten spelen
             //4. de Gamblers uitbetalen
-
+		
+	    //winner wordt als eerst op false gezet	
             bool winner = false;
 
             while (winner == false)
@@ -238,6 +245,7 @@ This game is the Horse racing game but then on the console
         {
             foreach (var huppelpaard in _horses)
             {
+	    	//update de positie van het paard 
                 huppelpaard.UpdatePosition();
             }
         }
