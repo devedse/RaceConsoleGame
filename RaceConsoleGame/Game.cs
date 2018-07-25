@@ -24,7 +24,7 @@ namespace RaceConsoleGame
 
             for (int i = 0; i < amountOfHorses; i++)
             {
-                _horses.Add(new Horse("Huppelpaard" + i));
+                _horses.Add(new Horse(_logger, "Huppelpaard" + i));
             }
         }
 

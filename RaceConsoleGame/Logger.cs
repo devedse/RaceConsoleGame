@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RaceConsoleGame
 {
-    class Logger
+    public class Logger
     {
         public Logger()
         {

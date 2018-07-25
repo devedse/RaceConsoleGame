@@ -10,20 +10,23 @@ namespace RaceConsoleGame
     public class Horse
     {
         private Random _speed;
+        private readonly Logger _logger;
+
         public int Location { get; private set; }
         public string Name { get; set; }
         
-        public Horse(string nameOfHorse) 
+        public Horse(Logger logger, string nameOfHorse) 
         {
             Name = nameOfHorse; 
             var guid = Guid.NewGuid();
             _speed = new Random(guid.GetHashCode());
+            _logger = logger;
         }
 
         public void UpdatePosition()
         {
             Location += _speed.Next(1, 5);
-            Console.WriteLine($"{Name}: {Location}");
+            _logger.Write($"{Name}: {Location}");
         }
     }
 
