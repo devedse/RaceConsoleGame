@@ -10,12 +10,14 @@ namespace RaceConsoleGame
     {
         private List<Horse> _horses { get; set; }
         private const int _lengthOfTrack = 100;
+        private Logger _logger;
 
         public List<Gambler> Gamblers { get; set; }
         public List<Bet> Bets { get; set; }
 
         public Game(int amountOfHorses)
         {
+            _logger = new Logger();
             _horses = new List<Horse>();
             Gamblers = new List<Gambler>();
             Bets = new List<Bet>();
@@ -29,17 +31,17 @@ namespace RaceConsoleGame
         public void StartGameLoop()
         {
             bool deGameIsAanDeGang = true;
-            Console.WriteLine("What do you want to do?");
+            _logger.Write("What do you want to do?");
 
             while (deGameIsAanDeGang) //==true is niet meer nodig, want hierboven heb ik al gespecificeerd dat de methode true is.
             {
                 //game menu
-                Console.WriteLine("\n1. Add Gambler");
-                Console.WriteLine("2. Add a bet!");
-                Console.WriteLine("3. Start race!"); 
-                Console.WriteLine("4. Show All Gamblers");
-                Console.WriteLine("5. Show All Bets");
-                Console.WriteLine("6. Exit");
+                _logger.Write("\n1. Add Gambler");
+                _logger.Write("2. Add a bet!");
+                _logger.Write("3. Start race!");
+                _logger.Write("4. Show All Gamblers");
+                _logger.Write("5. Show All Bets");
+                _logger.Write("6. Exit");
 
                 //input van de user
                 var userInput = Convert.ToInt32(Console.ReadLine());
@@ -155,7 +157,7 @@ namespace RaceConsoleGame
                 currentGambler.Cash -= gamblerBet;
 
                 var bet = new Bet(currentGambler, gamblerBet, horse);
-                
+
                 Bets.Add(bet);
 
                 Console.WriteLine($"You've placed another bet on {bet.Horse.Name} with an amount of {bet.BetAmount}");
@@ -201,10 +203,10 @@ namespace RaceConsoleGame
                 LaatDePaardjesEenStapLopen();
 
                 foreach (var horse in _horses)
-                { 
-                    
+                {
+
                     if (HasWinner(horse))
-                    { 
+                    {
                         winner = true;
                         Console.WriteLine($"{horse.Name} has won the race!");
 
@@ -242,7 +244,7 @@ namespace RaceConsoleGame
 
                 if (winningHorse == bet.Horse)
                 {
-                    
+
                     bet.Gambler.Cash += bet.BetAmount * 2;
                     Console.WriteLine($"{bet.Gambler.Name} has won {bet.BetAmount * 2}");
                 }

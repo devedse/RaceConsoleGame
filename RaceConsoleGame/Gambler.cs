@@ -9,7 +9,7 @@ namespace RaceConsoleGame
     public class Gambler
     {
         public string Name { get; set; }
-        private int Cash { get; set; }
+        public int Cash { get; set; }
 
         public Gambler(string name, int cash)
         {
